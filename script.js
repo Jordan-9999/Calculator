@@ -19,24 +19,33 @@ let numberB;
 
 
 const operate = (a, operator, b) => operator(a, b);
-    
-console.log(operate(5, multiply, 3));
+
+
+console.log(operate(5, add, 3));
+
+
+testNumber = "572753 + 88979";
+console.log(testNumber);
+console.log(splitUpDisplay = testNumber.split(" ").map(Number));
+console.log(splitUpDisplay);
+console.log(testOperator = splitUpDisplay[1]);
+console.log(testOperator);
 
 let display = document.querySelector("#display");
-//display.value = 6;
+
+
 
 
 
 const button0 = document.querySelector("#button0");
 button0.addEventListener("click", function(){  
     display.value += button0.value;
-    numberA = display.value
+    console.log(display.value);
 });
-
 const button1 = document.querySelector("#button1");
-button1.addEventListener("click", function(){  
+button1.addEventListener("click", function(){ 
     display.value += button1.value;
-    numberA = display.value
+    numberA = display.value;
 });
 const button2 = document.querySelector("#button2");
 button2.addEventListener("click", function(){  
@@ -83,3 +92,20 @@ buttonClear.addEventListener("click", function() {
     display.value = "";
 });
 
+const plusButton = document.querySelector("#plus-button");
+plusButton.addEventListener("click", function(){
+    operator = add;
+    display.value += " + ";
+});
+
+const equalsButton = document.querySelector("#equals-button");
+equalsButton.addEventListener("click", function(){
+let splitUpDisplay = display.value.split(" ").map(Number);
+numberA = splitUpDisplay[0] ;
+numberB = splitUpDisplay[2];
+
+console.log(numberA, numberB, operator);
+
+console.log(operate(numberA, operator, numberB));
+
+});
