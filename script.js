@@ -6,36 +6,19 @@ const multiply = (a, b) =>  a * b;
 
 const division = (a, b) => a / b;
 
-let numberA = "";
+let numberA;
 
 let operator;
 
 let numberB;
 
-//console.log(add(4, 2));
-//console.log(subtract(4, 2));
-//console.log(multiply(4, 2));
-//console.log(division(4, 2));
-
 
 const operate = (a, operator, b) => operator(a, b);
 
 
-console.log(operate(5, add, 3));
 
-
-testNumber = "572753 + 88979";
-console.log(testNumber);
-console.log(splitUpDisplay = testNumber.split(" ").map(Number));
-console.log(splitUpDisplay);
-console.log(testOperator = splitUpDisplay[1]);
-console.log(testOperator);
 
 let display = document.querySelector("#display");
-
-
-
-
 
 const button0 = document.querySelector("#button0");
 button0.addEventListener("click", function(){  
@@ -98,14 +81,29 @@ plusButton.addEventListener("click", function(){
     display.value += " + ";
 });
 
+const minusButton = document.querySelector("#minus-button");
+minusButton.addEventListener("click", function(){
+    operator = subtract;
+    display.value += " - ";
+});
+
+const multiplyButton = document.querySelector("#multiply-button");
+multiplyButton.addEventListener("click", function(){
+    operator = multiply;
+    display.value += " x ";
+});
+
+const divideButton = document.querySelector("#divide-button");
+divideButton.addEventListener("click", function(){
+    operator = division;
+    display.value += " % ";
+});
+
 const equalsButton = document.querySelector("#equals-button");
 equalsButton.addEventListener("click", function(){
 let splitUpDisplay = display.value.split(" ").map(Number);
 numberA = splitUpDisplay[0] ;
 numberB = splitUpDisplay[2];
 
-console.log(numberA, numberB, operator);
-
-console.log(operate(numberA, operator, numberB));
-
+display.value = operate(numberA, operator, numberB);
 });
