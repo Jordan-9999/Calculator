@@ -6,16 +6,20 @@ const multiply = (a, b) =>  a * b;
 
 const division = (a, b) => a / b;
 
-let numberA;
+let numberA = "";
 
-let operator;
+let operator = "";
 
-let numberB;
+let numberB = "";
 
 
 const operate = (a, operator, b) => operator(a, b);
 
-
+const storeValues = function(){
+    let splitUpDisplay = display.value.split(" ").map(Number);
+    numberA = splitUpDisplay[0];
+    numberB = splitUpDisplay[2];  
+};
 
 
 let display = document.querySelector("#display");
@@ -23,87 +27,111 @@ let display = document.querySelector("#display");
 const button0 = document.querySelector("#button0");
 button0.addEventListener("click", function(){  
     display.value += button0.value;
-    console.log(display.value);
+    storeValues();
 });
 const button1 = document.querySelector("#button1");
 button1.addEventListener("click", function(){ 
     display.value += button1.value;
-    numberA = display.value;
+    storeValues();
 });
 const button2 = document.querySelector("#button2");
 button2.addEventListener("click", function(){  
     display.value += button2.value;
-    numberA = display.value
+    storeValues();
 });
 const button3 = document.querySelector("#button3");
 button3.addEventListener("click", function(){  
     display.value += button3.value;
-    numberA = display.value
+    storeValues();
 });
 const button4 = document.querySelector("#button4");
 button4.addEventListener("click", function(){  
     display.value += button4.value;
-    numberA = display.value
+    storeValues();
 });
 const button5 = document.querySelector("#button5");
 button5.addEventListener("click", function(){  
     display.value += button5.value;
-    numberA = display.value
+    storeValues();
 });
 const button6 = document.querySelector("#button6");
 button6.addEventListener("click", function(){  
     display.value += button6.value;
-    numberA = display.value
+    storeValues();
 });
 const button7 = document.querySelector("#button7");
 button7.addEventListener("click", function(){  
     display.value += button7.value;
-    numberA = display.value
+    storeValues();
 });
 const button8 = document.querySelector("#button8");
 button8.addEventListener("click", function(){  
     display.value += button8.value;
-    numberA = display.value
+    storeValues();
 });
 const button9 = document.querySelector("#button9");
 button9.addEventListener("click", function(){  
     display.value += button9.value;
-    numberA = display.value
+    storeValues();
 });
 const buttonClear = document.querySelector("#button-clear");
 buttonClear.addEventListener("click", function() {
     display.value = "";
+    numberA = "";
+    numberB = "";
+    operator = "";
 });
 
 const plusButton = document.querySelector("#plus-button");
 plusButton.addEventListener("click", function(){
-    operator = add;
-    display.value += " + ";
+    
+    if(numberB === undefined){
+         operator = add;
+         display.value += " + ";}
+    else{
+        display.value = operate(numberA, operator, numberB);
+        operator = add;
+        display.value += " + ";
+    };
 });
 
 const minusButton = document.querySelector("#minus-button");
 minusButton.addEventListener("click", function(){
-    operator = subtract;
-    display.value += " - ";
+    if(numberB === undefined){
+        operator = subtract;
+        display.value += " - ";}
+   else{
+       display.value = operate(numberA, operator, numberB);
+       operator = subtract;
+       display.value += " - ";
+   };
 });
 
 const multiplyButton = document.querySelector("#multiply-button");
 multiplyButton.addEventListener("click", function(){
-    operator = multiply;
-    display.value += " x ";
+    if(numberB === undefined){
+        operator = multiply;
+        display.value += " x ";}
+   else{
+       display.value = operate(numberA, operator, numberB);
+       operator = multiply;
+       display.value += " x ";
+   };
 });
 
 const divideButton = document.querySelector("#divide-button");
 divideButton.addEventListener("click", function(){
-    operator = division;
-    display.value += " % ";
+    if(numberB === undefined){
+        operator = division;
+        display.value += " % ";}
+   else{
+       display.value = operate(numberA, operator, numberB);
+       operator = division;
+       display.value += " % ";
+   };
 });
 
 const equalsButton = document.querySelector("#equals-button");
 equalsButton.addEventListener("click", function(){
-let splitUpDisplay = display.value.split(" ").map(Number);
-numberA = splitUpDisplay[0] ;
-numberB = splitUpDisplay[2];
-
 display.value = operate(numberA, operator, numberB);
 });
