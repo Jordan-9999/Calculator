@@ -19,8 +19,24 @@ const storeValues = function(){
     let splitUpDisplay = display.value.split(" ").map(Number);
     numberA = splitUpDisplay[0];
     numberB = splitUpDisplay[2];  
+
+    if(numberA !== undefined){enableOperators()};
+    if(numberB !== undefined){equalsButton.disabled = false;};
 };
 
+const enableOperators = function(){
+    plusButton.disabled = false;
+    minusButton.disabled = false;
+    multiplyButton.disabled = false;
+    divideButton.disabled = false;
+};
+const disableOperators = function(){
+    plusButton.disabled = true;
+    minusButton.disabled = true;
+    multiplyButton.disabled = true;
+    divideButton.disabled = true;
+    equalsButton.disabled = true;
+};
 
 let display = document.querySelector("#display");
 
@@ -74,24 +90,20 @@ button9.addEventListener("click", function(){
     display.value += button9.value;
     storeValues();
 });
-const buttonClear = document.querySelector("#button-clear");
-buttonClear.addEventListener("click", function() {
-    display.value = "";
-    numberA = "";
-    numberB = "";
-    operator = "";
-});
+
 
 const plusButton = document.querySelector("#plus-button");
 plusButton.addEventListener("click", function(){
-    
     if(numberB === undefined){
          operator = add;
-         display.value += " + ";}
+         display.value += " + ";
+         disableOperators();
+        }
     else{
         display.value = operate(numberA, operator, numberB);
         operator = add;
         display.value += " + ";
+        disableOperators();
     };
 });
 
@@ -99,11 +111,13 @@ const minusButton = document.querySelector("#minus-button");
 minusButton.addEventListener("click", function(){
     if(numberB === undefined){
         operator = subtract;
-        display.value += " - ";}
+        display.value += " - ";
+        disableOperators();}
    else{
        display.value = operate(numberA, operator, numberB);
        operator = subtract;
        display.value += " - ";
+       disableOperators();
    };
 });
 
@@ -111,11 +125,13 @@ const multiplyButton = document.querySelector("#multiply-button");
 multiplyButton.addEventListener("click", function(){
     if(numberB === undefined){
         operator = multiply;
-        display.value += " x ";}
+        display.value += " x ";
+        disableOperators();}
    else{
        display.value = operate(numberA, operator, numberB);
        operator = multiply;
        display.value += " x ";
+       disableOperators();
    };
 });
 
@@ -123,15 +139,27 @@ const divideButton = document.querySelector("#divide-button");
 divideButton.addEventListener("click", function(){
     if(numberB === undefined){
         operator = division;
-        display.value += " % ";}
+        display.value += " % ";
+        disableOperators();}
    else{
        display.value = operate(numberA, operator, numberB);
        operator = division;
        display.value += " % ";
+       disableOperators();
    };
 });
 
 const equalsButton = document.querySelector("#equals-button");
 equalsButton.addEventListener("click", function(){
-display.value = operate(numberA, operator, numberB);
+    display.value = operate(numberA, operator, numberB);
+    equalsButton.disabled = true;
+});
+
+const buttonClear = document.querySelector("#button-clear");
+buttonClear.addEventListener("click", function() {
+    display.value = "";
+    numberA = "";
+    numberB = "";
+    operator = "";
+    disableOperators();
 });
