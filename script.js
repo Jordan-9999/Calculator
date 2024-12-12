@@ -12,8 +12,7 @@ let operator = "";
 
 let numberB = "";
 
-
-const operate = (a, operator, b) => operator(a, b);
+const operate = (a, operator, b) => parseFloat(operator(a, b).toFixed(8));
 
 const storeValues = function(){
     let splitUpDisplay = display.value.split(" ").map(Number);
