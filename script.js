@@ -12,7 +12,17 @@ let operator = "";
 
 let numberB = "";
 
-const operate = (a, operator, b) => parseFloat(operator(a, b).toFixed(8));
+const errorMessageFunc = function(){
+    disableNumButtons();
+    disableOperators();
+    return display.value = "Whoa! You can't do that!"
+};
+
+
+const operate = (a, operator, b) => numberB == 0 && operator == division ? errorMessageFunc() :
+parseFloat(operator(a, b).toFixed(8));
+
+
 
 const storeValues = function(){
     let splitUpDisplay = display.value.split(" ").map(Number);
@@ -20,7 +30,7 @@ const storeValues = function(){
     numberB = splitUpDisplay[2];  
 
     if(numberA !== undefined){enableOperators()};
-    if(numberB !== undefined){equalsButton.disabled = false;};
+    if(numberB !== undefined){equalsButton.disabled = false}; 
 };
 
 const enableOperators = function(){
@@ -36,6 +46,35 @@ const disableOperators = function(){
     divideButton.disabled = true;
     equalsButton.disabled = true;
 };
+
+const disableNumButtons = function(){
+    button0.disabled = true;
+    button1.disabled = true;
+    button2.disabled = true;
+    button3.disabled = true;
+    button4.disabled = true;
+    button5.disabled = true;
+    button6.disabled = true;
+    button7.disabled = true;
+    button8.disabled = true;
+    button9.disabled = true;
+};
+const enableNumButtons = function(){
+    button0.disabled = false;
+    button1.disabled = false;
+    button2.disabled = false;
+    button3.disabled = false;
+    button4.disabled = false;
+    button5.disabled = false;
+    button6.disabled = false;
+    button7.disabled = false;
+    button8.disabled = false;
+    button9.disabled = false;
+}
+
+
+
+
 
 let display = document.querySelector("#display");
 
@@ -98,6 +137,9 @@ plusButton.addEventListener("click", function(){
          display.value += " + ";
          disableOperators();
         }
+        else if(numberB === 0 && operator === division){
+            errorMessageFunc();
+        }
     else{
         display.value = operate(numberA, operator, numberB);
         operator = add;
@@ -111,7 +153,11 @@ minusButton.addEventListener("click", function(){
     if(numberB === undefined){
         operator = subtract;
         display.value += " - ";
-        disableOperators();}
+        disableOperators();
+        }
+        else if(numberB === 0 && operator === division){
+            errorMessageFunc();
+        }
    else{
        display.value = operate(numberA, operator, numberB);
        operator = subtract;
@@ -126,6 +172,9 @@ multiplyButton.addEventListener("click", function(){
         operator = multiply;
         display.value += " x ";
         disableOperators();}
+        else if(numberB === 0 && operator === division){
+            errorMessageFunc();
+        }
    else{
        display.value = operate(numberA, operator, numberB);
        operator = multiply;
@@ -140,6 +189,9 @@ divideButton.addEventListener("click", function(){
         operator = division;
         display.value += " % ";
         disableOperators();}
+        else if(numberB === 0 && operator === division){
+            errorMessageFunc();
+        }
    else{
        display.value = operate(numberA, operator, numberB);
        operator = division;
@@ -161,4 +213,6 @@ buttonClear.addEventListener("click", function() {
     numberB = "";
     operator = "";
     disableOperators();
+    enableNumButtons();
 });
+
