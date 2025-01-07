@@ -24,6 +24,7 @@ let display = document.querySelector("#display");
 const errorMessageFunc = function(){
     disableNumButtons();
     disableOperators();
+    backButton.disabled = true;
     decimalButton.disabled = true;
     return display.value = "Whoa! You can't do that!"
 };
@@ -34,9 +35,9 @@ const operate = (a, operator, b) => parseFloat(operator(a, b).toFixed(8));
 
 
 const storeValues = function(){
-    let splitUpDisplay = display.value.split(" ").map(Number);
+    let splitUpDisplay = display.value.split(/[+\-x÷]/).map(Number);
     numberA = splitUpDisplay[0];
-    numberB = splitUpDisplay[2];  
+    numberB = splitUpDisplay[1];  
 
     if(numberA !== undefined){enableOperators()};
     if(numberB !== undefined){equalsButton.disabled = false}; 
@@ -81,7 +82,7 @@ const plusButton = document.querySelector("#plus-button");
 plusButton.addEventListener("click", function(){
     if(numberB === undefined){
          operator = add;
-         display.value += " + ";
+         display.value += "+";
          disableOperators();
          numberA = "";
         }
@@ -92,7 +93,7 @@ plusButton.addEventListener("click", function(){
         display.value = operate(numberA, operator, numberB);
         if(numberA.toString().includes(".")){decimalButton.disabled = true};
         operator = add;
-        display.value += " + ";
+        display.value += "+";
         disableOperators();
         numberA = "";
     };
@@ -102,7 +103,7 @@ const minusButton = document.querySelector("#minus-button");
 minusButton.addEventListener("click", function(){
     if(numberB === undefined){
         operator = subtract;
-        display.value += " - ";
+        display.value += "-";
         disableOperators();
         numberA = "";
         }
@@ -113,7 +114,7 @@ minusButton.addEventListener("click", function(){
        display.value = operate(numberA, operator, numberB);
        if(numberA.toString().includes(".")){decimalButton.disabled = true};
        operator = subtract;
-       display.value += " - ";
+       display.value += "-";
        disableOperators();
        numberA = "";
    };
@@ -123,7 +124,7 @@ const multiplyButton = document.querySelector("#multiply-button");
 multiplyButton.addEventListener("click", function(){
     if(numberB === undefined){
         operator = multiply;
-        display.value += " x ";
+        display.value += "x";
         disableOperators();
         numberA = "";
         }
@@ -134,7 +135,7 @@ multiplyButton.addEventListener("click", function(){
        display.value = operate(numberA, operator, numberB);
        if(numberA.toString().includes(".")){decimalButton.disabled = true};
        operator = multiply;
-       display.value += " x ";
+       display.value += "x";
        disableOperators();
        numberA = "";
    };
@@ -144,7 +145,7 @@ const divideButton = document.querySelector("#divide-button");
 divideButton.addEventListener("click", function(){
     if(numberB === undefined){
         operator = division;
-        display.value += " % ";
+        display.value += "÷";
         disableOperators();
         numberA = "";
     }
@@ -155,7 +156,7 @@ divideButton.addEventListener("click", function(){
        display.value = operate(numberA, operator, numberB);
        if(numberA.toString().includes(".")){decimalButton.disabled = true};
        operator = division;
-       display.value += " % ";
+       display.value += "÷";
        disableOperators();
        numberA = "";
    };
@@ -167,12 +168,29 @@ equalsButton.addEventListener("click", function(){
         errorMessageFunc()}
     else{
     display.value = operate(numberA, operator, numberB);
-    storeValues();
+    storeValues(); 
     if(numberA.toString().includes(".")){decimalButton.disabled = true}
     else{decimalButton.disabled = false};
     equalsButton.disabled = true;
 }
 });
+
+const backButton = document.querySelector("#back-button");
+backButton.addEventListener("click", function(){
+let lastNum;
+const removeLast = function(arr){lastNum = arr.pop();return arr};
+let newDisplay = removeLast([...display.value]);
+display.value = newDisplay.join("");
+storeValues();
+if(display.value[display.value.length -1] == display.value.match(/[+\-x÷undefined]/)){
+ disableOperators()};
+if(display.value.includes(".") && display.value.match(/[+\-x÷]/) === null){
+ decimalButton.disabled = true};
+if(lastNum == "."){decimalButton.disabled = false};
+if(display.value == "" || display.value[display.value.length -1] == display.value.match(/[+\-x÷]/)){
+    numberA = ""};
+});
+
 
 const buttonClear = document.querySelector("#button-clear");
 buttonClear.addEventListener("click", function() {
@@ -182,5 +200,6 @@ buttonClear.addEventListener("click", function() {
     operator = "";
     disableOperators();
     enableNumButtons();
+    backButton.disabled = false;
 });
 
