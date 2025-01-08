@@ -21,6 +21,7 @@ let display = document.querySelector("#display");
 
 
 
+
 const errorMessageFunc = function(){
     disableNumButtons();
     disableOperators();
@@ -69,7 +70,7 @@ numButton.forEach(button => {
 });
 
 const decimalButton = document.querySelector("#decimal-button");
-      decimalButton.addEventListener("click", ()=> { 
+      decimalButton.addEventListener("click", (event)=> { 
     if(numberA === ""){display.value += 0};
       display.value += decimalButton.value;
       storeValues();
