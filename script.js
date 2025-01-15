@@ -27,7 +27,7 @@ const errorMessageFunc = function(){
     disableOperators();
     backButton.disabled = true;
     decimalButton.disabled = true;
-    return display.value = "Whoa! You can't do that!"
+    return display.value = "Whoa!"
 };
 
 const operate = (a, operator, b) => parseFloat(operator(a, b).toFixed(8));

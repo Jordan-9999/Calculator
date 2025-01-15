@@ -3,37 +3,57 @@
 <html>
     <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <title>Calculator</title>
 <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
-<button type="button" id="decimal-button" value = .>.</button>
-<button type="button" class="num-button" value = 0>0</button>
-<button type="button" class="num-button" value = 1>1</button>
-<button type="button" class="num-button" value = 2>2</button>
-<button type="button" class="num-button" value = 3>3</button>
-<button type="button" class="num-button" value = 4>4</button>
-<button type="button" class="num-button" value = 5>5</button>
-<button type="button" class="num-button" value = 6>6</button>
-<button type="button" class="num-button" value = 7>7</button>
-<button type="button" class="num-button" value = 8>8</button>
-<button type="button" class="num-button" value = 9>9</button>
 
-<button disabled type="button" class="operator-button" id="plus-button">+</button>
-<button disabled type="button" class="operator-button" id="minus-button">-</button>
-<button disabled type="button" class="operator-button" id="multiply-button">x</button>
-<button disabled type="button" class="operator-button" id="divide-button">÷</button>
 
-<button disabled type="button" id="equals-button">=</button>
 
-<button type ="button" id="back-button">back</button>
 
-<form>
-<input type="text" id="display" name="display" readonly>
-</form>
+<div class="container">
 
-<button type="button" id="button-clear">C</button>
+    
+     <div class="calculator-object">
+        <div class="display-container">
+        <form><input type="text" id="display" name="display" readonly></form>
+       </div>
+        <div class="num-section" >
+
+        <div class="column">
+        <button type ="button" id="back-button">⇦</button>
+        <button type="button" id="button-clear">C</button>
+        </div>
+        <div class="column">
+        <button type="button" class="num-button" value = 7>7</button>
+        <button type="button" class="num-button" value = 8>8</button>
+        <button type="button" class="num-button" value = 9>9</button>
+        <button disabled type="button" class="operator-button" id="divide-button">÷</button>
+        </div>
+        <div class="column">
+        <button type="button" class="num-button" value = 4>4</button>
+        <button type="button" class="num-button" value = 5>5</button>
+        <button type="button" class="num-button" value = 6>6</button>
+        <button disabled type="button" class="operator-button" id="multiply-button">×</button>
+        </div>
+        <div class="column">
+        <button type="button" class="num-button" value = 1>1</button>
+        <button type="button" class="num-button" value = 2>2</button>
+        <button type="button" class="num-button" value = 3>3</button>
+        <button disabled type="button" class="operator-button" id="minus-button">–</button>
+        </div>
+        <div class="column">
+        <button type="button" class="num-button" value = 0>0</button>
+        <button type="button" id="decimal-button" value = .>.</button>
+        <button disabled type="button" id="equals-button">=</button>
+        <button disabled type="button" class="operator-button" id="plus-button">+</button>
+        </div>
+    </div>
+    </div>
+    </div>
+
 
         <script src="script.js"></script>
     </body>
